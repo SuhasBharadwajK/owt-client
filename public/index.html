@@ -119,7 +119,18 @@
         <!-- End of Sidebar -->
 
         <!-- Start of video stream -->
-        <div class="video-stream" ng-class="{'expanded': !isChatWindowOpen}">
+        <div class="video-container full-width">
+          <div class="video-stream" ng-class="{'expanded': !isChatWindowOpen}">
+          </div>
+          <div class="video-chat-buttons"> 
+            <a href="#"><i class="material-icons icon-style" ng-click="ctrl.toggleChatWindow()">comment</i></a>  
+            <!-- <a href="#"><i class="material-icons icon-style">group_add</i></a>   -->
+            <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="ctrl.isMicrophoneActive"><i class="material-icons icon-style">mic</i></a> 
+            <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="!ctrl.isMicrophoneActive"><i class="material-icons icon-style">mic_off</i></a> 
+            <a href="#" ng-click="ctrl.toggleCamera()" ng-show="ctrl.isCameraActive"><i class="material-icons icon-style">videocam</i></a> 
+            <a href="#" ng-click="ctrl.toggleCamera()" ng-show="!ctrl.isCameraActive"><i class="material-icons icon-style">videocam_off</i></a>
+            <a href="#" ng-click="ctrl.endCall()"><i class="material-icons icon-style" style="color:red;">call_end</i></a> 
+          </div>
         </div>
         <!-- End of video stream -->
 			</div>

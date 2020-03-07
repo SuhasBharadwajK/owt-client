@@ -2,9 +2,10 @@ var phonecatApp = angular.module('liveChatApp', []);
 
 phonecatApp.controller('HomeController', function HomeController($scope) {
     var vm = this;
-    vm.isChatWindowOpen = !false;
+    vm.isChatWindowOpen = false;
     vm.messages = [];
-
+    vm.isMicrophoneActive = true;
+    vm.isCameraActive = true;
 
     vm.toggleChatWindow = function () {
         vm.isChatWindowOpen = !vm.isChatWindowOpen;
@@ -42,6 +43,18 @@ phonecatApp.controller('HomeController', function HomeController($scope) {
                 vm.messageText = null;
             }
         }
+    };
+
+    vm.toggleMicrophone = function() {
+        vm.isMicrophoneActive = !vm.isMicrophoneActive;
+    };
+
+    vm.toggleCamera = function() {
+        vm.isCameraActive = !vm.isCameraActive;
+    };
+
+    vm.endCall = function() {
+        conference.leave();
     };
 
     init();

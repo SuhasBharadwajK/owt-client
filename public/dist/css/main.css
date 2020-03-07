@@ -52,7 +52,7 @@ body {
 }
 
 .video-stream.expanded {
-    width: calc(100% - 176px);
+    width: calc(100% - 25px);
 }
 
 .video-stream video {

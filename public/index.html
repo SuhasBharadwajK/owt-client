@@ -49,7 +49,7 @@
 							<div class="nav nav-tab menu">
 								<button class="btn"><img class="avatar-xl" src="dist/img/avatars/avatar-male-1.jpg" alt="avatar"></button>
 								<a href="#members" data-toggle="tab"><i class="material-icons">account_circle</i></a>
-								<a class="node" data-toggle="tab" ng-class="{'active': isChatWindowOpen}"><i class="material-icons" ng-class="{'active': isChatWindowOpen}" ng-click="toggleChatWindow()">chat_bubble_outline</i></a>
+								<a class="node" data-toggle="tab" ng-class="{'active': ctrl.isChatWindowOpen}"><i class="material-icons" ng-class="{'active': ctrl.isChatWindowOpen}" ng-click="ctrl.toggleChatWindow()">chat_bubble_outline</i></a>
 								<a href="#notifications" data-toggle="tab" class="f-grow1"><i class="material-icons">notifications_none</i></a>
 								<button class="btn mode"><i class="material-icons">brightness_2</i></button>
 								<a href="#settings" data-toggle="tab"><i class="material-icons">settings</i></a>
@@ -60,7 +60,7 @@
 				</div>
 				<!-- End of Navigation -->
 				<!-- Start of Sidebar -->
-				<div class="sidebar clear-padding" id="sidebar" ng-if="isChatWindowOpen">	
+				<div class="sidebar clear-padding" id="sidebar" ng-if="ctrl.isChatWindowOpen">	
 					<div class="container clear-padding">
 						<div class="col-md-12">
 							<div class="tab-content">
@@ -74,132 +74,33 @@
                           <div class="content clear-padding" id="content">
                             <div class="container clear-padding">
                               <div class="col-md-12 clear-padding">
-                                <div class="message">
+
+                                <!-- Start of Chat Messages -->
+                                <div class="message" ng-class="{ 'me': message.isMe }" ng-repeat="message in ctrl.messages">
                                   <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
-                                    data-placement="top" title="Keith" alt="avatar">
-                                  <div class="text-main">
-                                    <div class="text-group">
-                                      <div class="text">
-                                        <p>We've got some killer ideas kicking about already.</p>
+                                    data-placement="top" title="Keith" alt="avatar" ng-if="!message.isMe">
+                                  <div class="text-main full-width chat-message">
+                                    <div class="text-group" ng-class="{ 'me': message.isMe }">
+                                      <div class="text text-dark" ng-class="{ 'me': message.isMe }">
+                                        <p>{{message.messageText}}</p>
                                       </div>
                                     </div>
-                                    <span>09:46 AM</span>
+                                    <span>{{ message.timestamp | date: 'hh:mm a' }}</span>
                                   </div>
                                 </div>
-                                <div class="message me">
-                                  <div class="text-main">
-                                    <div class="text-group me">
-                                      <div class="text me">
-                                        <p>Can't wait! How are we coming along with the client?</p>
-                                      </div>
-                                    </div>
-                                    <span>11:32 AM</span>
-                                  </div>
-                                </div>
-                                <div class="message">
-                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
-                                    data-placement="top" title="Keith" alt="avatar">
-                                  <div class="text-main">
-                                    <div class="text-group">
-                                      <div class="text">
-                                        <p>Coming along nicely, we've got a draft for the client quarries completed.</p>
-                                      </div>
-                                    </div>
-                                    <span>02:56 PM</span>
-                                  </div>
-                                </div>
-                                <div class="message me">
-                                  <div class="text-main">
-                                    <div class="text-group me">
-                                      <div class="text me">
-                                        <p>Roger that boss!</p>
-                                      </div>
-                                    </div>
-                                    <div class="text-group me">
-                                      <div class="text me">
-                                        <p>I have already started gathering some stuff for the mood boards, excited to start!</p>
-                                      </div>
-                                    </div>
-                                    <span>10:21 PM</span>
-                                  </div>
-                                </div>
-                                <div class="message">
-                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
-                                    data-placement="top" title="Keith" alt="avatar">
-                                  <div class="text-main">
-                                    <div class="text-group">
-                                      <div class="text">
-                                        <p>Great start guys, I've added some notes to the task. We may need to make some adjustments to
-                                          the last couple of items - but no biggie!</p>
-                                      </div>
-                                    </div>
-                                    <span>11:07 PM</span>
-                                  </div>
-                                </div>
-                                <div class="message me">
-                                  <div class="text-main">
-                                    <div class="text-group me">
-                                      <div class="text me">
-                                        <p>Well done all. See you all at 2 for the kick-off meeting.</p>
-                                      </div>
-                                    </div>
-                                    <span>10:21 PM</span>
-                                  </div>
-                                </div>
-                                <div class="message">
-                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
-                                    data-placement="top" title="Keith" alt="avatar">
-                                  <div class="text-main">
-                                    <div class="text-group">
-                                      <div class="text">
-                                        <div class="attachment">
-                                          <button class="btn attach"><i class="material-icons md-18">insert_drive_file</i></button>
-                                          <div class="file">
-                                            <h5><a href="#">Kenacy .pdf</a></h5>
-                                            <span>24kb Document</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <span>11:07 PM</span>
-                                  </div>
-                                </div>
-                                <div class="message me">
-                                  <div class="text-main">
-                                    <div class="text-group me">
-                                      <div class="text me">
-                                        <p>Hope you're all ready to tackle this great project. Let's smash some Brand Concept & Design!
-                                        </p>
-                                      </div>
-                                    </div>
-                                    <span><i class="material-icons">check</i>10:21 PM</span>
-                                  </div>
-                                </div>
-                                <div class="message">
-                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
-                                    data-placement="top" title="Keith" alt="avatar">
-                                  <div class="text-main">
-                                    <div class="text-group">
-                                      <div class="text typing">
-                                        <div class="wave">
-                                          <span class="dot"></span>
-                                          <span class="dot"></span>
-                                          <span class="dot"></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                <!-- End of Chat Messages -->
+
                               </div>
                             </div>
                           </div>
+
                           <div class="container clear-padding">
                             <div class="col-md-12 clear-padding">
                               <div class="bottom clear-bottom-padding">
                                 <form class="position-relative w-100 clear-vertical-margin">
-                                  <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
+                                  <textarea class="form-control text-dark" placeholder="Start typing for reply..." rows="1" ng-model="ctrl.messageText" ng-keyup="ctrl.onMessageInputKeyUp($event)"></textarea>
                                   <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
-                                  <button type="submit" class="btn send"><i class="material-icons">send</i></button>
+                                  <button type="submit" class="btn send" ng-click="ctrl.sendMessage()"><i class="material-icons">send</i></button>
                                 </form>
                               </div>
                             </div>

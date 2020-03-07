@@ -7,3 +7,50 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.clear-padding {
+    padding: 0 !important;
+}
+
+.clear-top-padding {
+    padding-top: 0 !important;
+}
+
+.clear-bottom-padding {
+    padding-bottom: 0 !important;
+}
+
+.clear-left-padding {
+    padding-left: 0 !important;
+}
+
+.clear-right-padding {
+    padding-right: 0 !important;
+}
+
+.clear-horizontal-padding {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.clear-vertical-padding {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.clear-vertical-margin {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.main .chat .content {
+    height: calc(100vh - 100px) !important;
+}
+
+.video-stream {
+    width: calc(100% - 473px);
+}
+
+.video-stream video {
+    width: 100% !important;
+}

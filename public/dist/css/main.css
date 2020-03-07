@@ -51,6 +51,14 @@ body {
     width: calc(100% - 473px);
 }
 
+.video-stream.expanded {
+    width: calc(100% - 176px);
+}
+
 .video-stream video {
     width: 100% !important;
+}
+
+.node {
+    cursor: pointer;
 }

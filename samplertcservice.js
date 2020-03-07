@@ -63,7 +63,11 @@ app.use(function(req, res, next) {
   }
 });
 
-icsREST.API.init('5e05e0514e5baf2674523040', 'tNVzZxFh3GVLZg47ugwduEFzTpuZaAsxo9rUoSRv8oY/CnVnDFHmroanHVcj3p7YDcACDWEhh/tNvaSjrrt/dxXPpx3lQYTpwqWpGc5RshkuNu2IjRF3UCzSwu33O1L8mIfAPzTFp0Zb+9LV6Jmxp7QVdocs7JgnADyHtT93tfI=', 'https://localhost:3000/', false);
+icsREST.API.init(
+  '5e05e0514e5baf267452303f',
+  'NHnRAs1QaQFOYcF4GhuE1RbpYoFrHKTgV7Fo9+BCbom9eqCfV/b9O5pwBNVjcI1o5OowzzMu2ud4H15y3BwrwJqZqICRsBEMAy0bVWhxNlpALzDnjlq5Avx/XwnqVk2tiaeHjk1z56A8xsSCGTjnOEfgQgDVu2FG++BcgTLouGM=',
+  'https://localhost:3000/',
+  false);
 
 var sampleRoom;
 var pageOption = { page: 1, per_page: 100 };
@@ -71,7 +75,8 @@ var pageOption = { page: 1, per_page: 100 };
   icsREST.API.getRooms(pageOption, function(rooms) {
     console.log(rooms.length + ' rooms in this service.');
     for (var i = 0; i < rooms.length; i++) {
-      if (sampleRoom === undefined && rooms[i].name === 'sampleRoom') {
+      // CONFIG: Change this for changing the room
+      if (sampleRoom === undefined && rooms[i].name === 'TestRoom') {
         sampleRoom = rooms[i]._id;
         console.log('sampleRoom Id:', sampleRoom);
       }

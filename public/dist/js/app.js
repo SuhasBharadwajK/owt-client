@@ -11,28 +11,11 @@ phonecatApp.controller('HomeController', function HomeController($scope) {
         vm.isChatWindowOpen = !vm.isChatWindowOpen;
     };
 
-    const init = function () {
-        conference.addEventListener("messagereceived", onMessageReceived);
-        vm.messageText = "";
-    };
-
-
-    const onMessageReceived = function (event) {
-        vm.messages.push(new Message({messageText: event.message, from: event.origin, to: event.to, isMe: conference.info.self.id == event.origin }));
-        $scope.$apply();
-    };
-
     vm.sendMessage = function () {
         if (vm.messageText) {
             conference.send(vm.messageText).then(onMessageSent);
         }
     };
-
-    const onMessageSent = function() {
-        $scope.$apply(function () {
-            vm.messageText = null;
-        });
-    }
 
     vm.onMessageInputKeyUp = function(event) {
         if (event.key.toLowerCase() === 'enter' || event.which === 13) {
@@ -55,6 +38,23 @@ phonecatApp.controller('HomeController', function HomeController($scope) {
 
     vm.endCall = function() {
         conference.leave();
+    };
+
+    const init = function () {
+        conference.addEventListener("messagereceived", onMessageReceived);
+        vm.messageText = "";
+    };
+
+
+    const onMessageReceived = function (event) {
+        vm.messages.push(new Message({messageText: event.message, from: event.origin, to: event.to, isMe: conference.info.self.id == event.origin }));
+        $scope.$apply();
+    };
+
+    const onMessageSent = function() {
+        $scope.$apply(function () {
+            vm.messageText = null;
+        });
     };
 
     init();

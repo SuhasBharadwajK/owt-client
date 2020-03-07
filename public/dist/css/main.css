@@ -59,6 +59,18 @@ body {
     width: 100% !important;
 }
 
+.display-block {
+    display: block !important;
+}
+
+.full-width {
+    width: 100% !important;
+}
+
 .node {
     cursor: pointer;
+}
+
+.text-dark {
+    color: #333333 !important;
 }

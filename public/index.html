@@ -30,19 +30,211 @@
   <meta charset="utf-8">
   <head>
     <title>Intel&reg; Collaboration Suite for WebRTC Conference Sample</title>
-    <link href="css/main.css" rel="stylesheet">
+    <link href="dist/css/lib/bootstrap.min.css" type="text/css" rel="stylesheet">
+		<!-- Swipe core CSS -->
+		<link href="dist/css/swipe.min.css" type="text/css" rel="stylesheet">
+    <link href="dist/css/main.css" rel="stylesheet">
   </head>
 
   <body>
-    <div style="width:320px;height:240" class="local">
+    <div style="display:none;width:320px;height:240" class="local">
       <video playsinline muted autoplay style="width:320px;height:240"></video>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <main>
+			<div class="layout">
+				<!-- Start of Navigation -->
+				<div class="navigation">
+					<div class="container">
+						<div class="inside">
+							<div class="nav nav-tab menu">
+								<button class="btn"><img class="avatar-xl" src="dist/img/avatars/avatar-male-1.jpg" alt="avatar"></button>
+								<a href="#members" data-toggle="tab"><i class="material-icons">account_circle</i></a>
+								<a href="#discussions" data-toggle="tab" class="active"><i class="material-icons active">chat_bubble_outline</i></a>
+								<a href="#notifications" data-toggle="tab" class="f-grow1"><i class="material-icons">notifications_none</i></a>
+								<button class="btn mode"><i class="material-icons">brightness_2</i></button>
+								<a href="#settings" data-toggle="tab"><i class="material-icons">settings</i></a>
+								<button class="btn power" onclick="visitPage();"><i class="material-icons">power_settings_new</i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End of Navigation -->
+				<!-- Start of Sidebar -->
+				<div class="sidebar clear-padding" id="sidebar">	
+					<div class="container clear-padding">
+						<div class="col-md-12">
+							<div class="tab-content">
+								<!-- Start of Discussions Adding Lean's Chat here --> 
+                <div id="discussions" class="tab-pane fade active show">
+                  <div class="main">
+                    <div class="tab-content" id="nav-tabContent">
+                      <div class="babble tab-pane fade active show" id="list-chat" role="tabpanel" aria-labelledby="list-chat-list">
+                        <!-- Start of Chat -->
+                        <div class="chat" id="chat12">
+                          <div class="content clear-padding" id="content">
+                            <div class="container clear-padding">
+                              <div class="col-md-12 clear-padding">
+                                <div class="message">
+                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
+                                    data-placement="top" title="Keith" alt="avatar">
+                                  <div class="text-main">
+                                    <div class="text-group">
+                                      <div class="text">
+                                        <p>We've got some killer ideas kicking about already.</p>
+                                      </div>
+                                    </div>
+                                    <span>09:46 AM</span>
+                                  </div>
+                                </div>
+                                <div class="message me">
+                                  <div class="text-main">
+                                    <div class="text-group me">
+                                      <div class="text me">
+                                        <p>Can't wait! How are we coming along with the client?</p>
+                                      </div>
+                                    </div>
+                                    <span>11:32 AM</span>
+                                  </div>
+                                </div>
+                                <div class="message">
+                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
+                                    data-placement="top" title="Keith" alt="avatar">
+                                  <div class="text-main">
+                                    <div class="text-group">
+                                      <div class="text">
+                                        <p>Coming along nicely, we've got a draft for the client quarries completed.</p>
+                                      </div>
+                                    </div>
+                                    <span>02:56 PM</span>
+                                  </div>
+                                </div>
+                                <div class="message me">
+                                  <div class="text-main">
+                                    <div class="text-group me">
+                                      <div class="text me">
+                                        <p>Roger that boss!</p>
+                                      </div>
+                                    </div>
+                                    <div class="text-group me">
+                                      <div class="text me">
+                                        <p>I have already started gathering some stuff for the mood boards, excited to start!</p>
+                                      </div>
+                                    </div>
+                                    <span>10:21 PM</span>
+                                  </div>
+                                </div>
+                                <div class="message">
+                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
+                                    data-placement="top" title="Keith" alt="avatar">
+                                  <div class="text-main">
+                                    <div class="text-group">
+                                      <div class="text">
+                                        <p>Great start guys, I've added some notes to the task. We may need to make some adjustments to
+                                          the last couple of items - but no biggie!</p>
+                                      </div>
+                                    </div>
+                                    <span>11:07 PM</span>
+                                  </div>
+                                </div>
+                                <div class="message me">
+                                  <div class="text-main">
+                                    <div class="text-group me">
+                                      <div class="text me">
+                                        <p>Well done all. See you all at 2 for the kick-off meeting.</p>
+                                      </div>
+                                    </div>
+                                    <span>10:21 PM</span>
+                                  </div>
+                                </div>
+                                <div class="message">
+                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
+                                    data-placement="top" title="Keith" alt="avatar">
+                                  <div class="text-main">
+                                    <div class="text-group">
+                                      <div class="text">
+                                        <div class="attachment">
+                                          <button class="btn attach"><i class="material-icons md-18">insert_drive_file</i></button>
+                                          <div class="file">
+                                            <h5><a href="#">Kenacy .pdf</a></h5>
+                                            <span>24kb Document</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span>11:07 PM</span>
+                                  </div>
+                                </div>
+                                <div class="message me">
+                                  <div class="text-main">
+                                    <div class="text-group me">
+                                      <div class="text me">
+                                        <p>Hope you're all ready to tackle this great project. Let's smash some Brand Concept & Design!
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <span><i class="material-icons">check</i>10:21 PM</span>
+                                  </div>
+                                </div>
+                                <div class="message">
+                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
+                                    data-placement="top" title="Keith" alt="avatar">
+                                  <div class="text-main">
+                                    <div class="text-group">
+                                      <div class="text typing">
+                                        <div class="wave">
+                                          <span class="dot"></span>
+                                          <span class="dot"></span>
+                                          <span class="dot"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="container clear-padding">
+                            <div class="col-md-12 clear-padding">
+                              <div class="bottom clear-bottom-padding">
+                                <form class="position-relative w-100 clear-vertical-margin">
+                                  <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
+                                  <button class="btn emoticons"><i class="material-icons">insert_emoticon</i></button>
+                                  <button type="submit" class="btn send"><i class="material-icons">send</i></button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End of Chat -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+								<!-- End of Settings -->
+							</div>
+						</div>
+					</div>
+				</div>
+        <!-- End of Sidebar -->
+
+        <!-- Start of video stream -->
+        <div class="video-stream">
+        </div>
+        <!-- End of video stream -->
+			</div>
+		</main>
+
+		<script src="dist/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" type="text/javascript"></script>
     <script src="https://webrtchacks.github.io/adapter/adapter-7.0.0.js" type="text/javascript"></script>
-    <script src="scripts/owt.js" type="text/javascript"></script>
-    <script src="scripts/index.js" type="text/javascript"></script>
-    <script src="scripts/rest-sample.js" type="text/javascript"></script>
+    <script src="dist/js/owt.js" type="text/javascript"></script>
+    <script src="dist/js/index.js" type="text/javascript"></script>
+    <script src="dist/js/rest-sample.js" type="text/javascript"></script>
+    <script src="dist/js/vendor/popper.min.js"></script>
+		<script src="dist/js/swipe.min.js"></script>
+		<script src="dist/js/bootstrap.min.js"></script>
+		<script>window.jQuery || document.write('<script src="dist/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js" type="text/javascript"></script>
     <script language="JavaScript">
       function getParameterByName(name) {
         name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');

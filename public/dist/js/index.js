@@ -29,7 +29,7 @@
 'use strict';
 var conference;
 var publicationGlobal;
-const runSocketIOSample = function() {
+const runSocketIOSample = function () {
 
     let localStream;
     let showedRemoteStreams = [];
@@ -45,22 +45,22 @@ const runSocketIOSample = function() {
             /\+/g, ' '));
     }
 
-    var subscribeForward = getParameterByName('forward') === 'true'?true:false;
-    var isSelf = getParameterByName('self') === 'false'?false:true;
+    var subscribeForward = getParameterByName('forward') === 'true' ? true : false;
+    var isSelf = getParameterByName('self') === 'false' ? false : true;
 
-	// Configuration of the conference with Google STUN server
+    // Configuration of the conference with Google STUN server
     conference = new Owt.Conference.ConferenceClient({
-            rtcConfiguration: {
-                iceServers: [{
-                    urls: "stun:stun.l.google.com:19302"
-                }]
-            }
-        });
-	// End of configuration
-	//
-    function renderVideo(stream){
-        let subscirptionForward=null;
-        function subscribeDifferentResolutionForward(forward, resolution){
+        rtcConfiguration: {
+            iceServers: [{
+                urls: "stun:stun.l.google.com:19302"
+            }]
+        }
+    });
+    // End of configuration
+    //
+    function renderVideo(stream) {
+        let subscirptionForward = null;
+        function subscribeDifferentResolutionForward(forward, resolution) {
             subscirptionForward && subscirptionForward.stop();
             subscirptionForward = null;
             const videoOptions = {};
@@ -70,7 +70,7 @@ const runSocketIOSample = function() {
                 video: videoOptions
             }).then((
                 subscription) => {
-                    subscirptionForward = subscription;
+                subscirptionForward = subscription;
                 $(`#${stream.id}`).get(0).srcObject = stream.mediaStream;
             });
         }
@@ -87,19 +87,20 @@ const runSocketIOSample = function() {
         };
         $p.appendTo($('body'));
         conference.subscribe(stream)
-        .then((subscription)=>{
-            subscirptionForward = subscription;
-            let $video = $(`<video controls autoplay id=${stream.id} style="display:block" >this browser does not supported video tag</video>`);
-           $video.get(0).srcObject = stream.mediaStream;
-           $p.append($video);
-        }, (err)=>{ console.log('subscribe failed', err);
-        });
+            .then((subscription) => {
+                subscirptionForward = subscription;
+                let $video = $(`<video controls autoplay id=${stream.id} style="display:block" >this browser does not supported video tag</video>`);
+                $video.get(0).srcObject = stream.mediaStream;
+                $p.append($video);
+            }, (err) => {
+                console.log('subscribe failed', err);
+            });
         stream.addEventListener('ended', () => {
             removeUi(stream.id);
             $(`#${stream.id}resolutions`).remove();
         });
     }
-    function removeUi(id){
+    function removeUi(id) {
         $(`#${id}`).remove();
     }
     function subscribeDifferentResolution(stream, resolution) {
@@ -119,7 +120,7 @@ const runSocketIOSample = function() {
 
     conference.addEventListener('streamadded', (event) => {
         console.log('A new stream is added ', event.stream.id);
-        isSelf = isSelf?isSelf:event.stream.id != publicationGlobal.id;
+        isSelf = isSelf ? isSelf : event.stream.id != publicationGlobal.id;
         subscribeForward && isSelf && renderVideo(event.stream);
         mixStream(myRoom, event.stream.id, 'common');
         event.stream.addEventListener('ended', () => {
@@ -128,7 +129,7 @@ const runSocketIOSample = function() {
     });
 
 
-    window.onload = function() {
+    window.onload = function () {
         var myResolution = getParameterByName('resolution') || {
             width: 1280,
             height: 720
@@ -138,13 +139,13 @@ const runSocketIOSample = function() {
         var isHttps = (location.protocol === 'https:');
         var mediaUrl = getParameterByName('url');
         var isPublish = getParameterByName('publish');
-        createToken(myRoom, 'user', 'presenter', function(response) {
+        createToken(myRoom, 'user', 'presenter', function (response) {
             var token = response;
             conference.join(token).then(resp => {
                 myId = resp.self.id;
                 myRoom = resp.id;
-                if(mediaUrl){
-                     startStreamingIn(myRoom, mediaUrl);
+                if (mediaUrl) {
+                    startStreamingIn(myRoom, mediaUrl);
                 }
                 if (isPublish !== 'false') {
                     const audioConstraintsForMic = new Owt.Base.AudioTrackConstraints(Owt.Base.AudioSourceInfo.MIC);
@@ -152,65 +153,68 @@ const runSocketIOSample = function() {
                     let mediaStream;
                     Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
                         audioConstraintsForMic, videoConstraintsForCamera)).then(stream => {
-                        mediaStream = stream;
-                        localStream = new Owt.Base.LocalStream(
-                            mediaStream, new Owt.Base.StreamSourceInfo(
-                                'mic', 'camera'));
-                        $('.local video').get(0).srcObject = stream;
-                        conference.publish(localStream).then(publication => {
-                            publicationGlobal = publication;
-                            mixStream(myRoom, publication.id, 'common')
-                            publication.addEventListener('error', (err) => {
-                                console.log('Publication error: ' + err.error.message);
+                            mediaStream = stream;
+                            localStream = new Owt.Base.LocalStream(
+                                mediaStream, new Owt.Base.StreamSourceInfo(
+                                    'mic', 'camera'));
+                            $('.local video').get(0).srcObject = stream;
+                            conference.publish(localStream).then(publication => {
+                                publicationGlobal = publication;
+                                mixStream(myRoom, publication.id, 'common')
+                                publication.addEventListener('error', (err) => {
+                                    console.log('Publication error: ' + err.error.message);
+                                });
                             });
+                        }, err => {
+                            console.error('Failed to create MediaStream, ' +
+                                err);
                         });
-                    }, err => {
-                        console.error('Failed to create MediaStream, ' +
-                            err);
-                    });
                 }
                 var streams = resp.remoteStreams;
                 for (const stream of streams) {
-                    if(!subscribeForward){
-                      if (stream.source.audio === 'mixed' || stream.source.video ===
-                        'mixed') {
-                        conference.subscribe(stream, {
-                            audio: {codecs:[{name:'opus'}]},
-                            video: true
-                        }).then((subscription) => {
-                            subscriptionForMixedStream = subscription;
-                            let $video = $(`<video controls autoplay id=${stream.id} style='display:block'>this browser does not supported video tag</video>`);
-                            $video.get(0).srcObject = stream.mediaStream;
-                            $('body').append($video);
-                            subscription.addEventListener('error', (err) => {
-                                console.log('Subscription error: ' + err.error.message);
-                            })
-                        });
-                        for (const resolution of stream.capabilities.video.resolutions) {
-                            const button = $('<button/>', {
-                                text: resolution.width + 'x' +
-                                    resolution.height,
-                                click: () => {
-                                    subscribeDifferentResolution(stream, resolution);
-                                }
+                    if (!subscribeForward) {
+                        if (stream.source.audio === 'mixed' || stream.source.video === 'mixed') {
+                            
+                            const videoStreamElement = $('.video-stream');
+
+                            conference.subscribe(stream, {
+                                audio: { codecs: [{ name: 'opus' }] },
+                                video: true
+                            }).then((subscription) => {
+                                subscriptionForMixedStream = subscription;
+                                let $video = $(`<video controls autoplay id=${stream.id} style='display:block'>this browser does not support video tag</video>`);
+                                $video.get(0).srcObject = stream.mediaStream;
+                                $video.get(0).controls = false;
+                                videoStreamElement.append($video);
+                                subscription.addEventListener('error', (err) => {
+                                    console.log('Subscription error: ' + err.error.message);
+                                })
                             });
-                            button.appendTo($('body'));
-                        };
-                      }
-                    }else if(stream.source.audio !== 'mixed'){
+                            for (const resolution of stream.capabilities.video.resolutions) {
+                                const button = $('<button/>', {
+                                    text: resolution.width + 'x' +
+                                        resolution.height,
+                                    click: () => {
+                                        subscribeDifferentResolution(stream, resolution);
+                                    }
+                                });
+                                // button.appendTo($('body'));
+                            };
+                        }
+                    } else if (stream.source.audio !== 'mixed') {
                         subscribeForward && renderVideo(stream);
                     }
                 }
                 console.log('Streams in conference:', streams.length);
                 var participants = resp.participants;
                 console.log('Participants in conference: ' + participants.length);
-            }, function(err) {
+            }, function (err) {
                 console.error('server connection failed:', err);
             });
         });
     };
 };
-window.onbeforeunload = function(event){
+window.onbeforeunload = function (event) {
     conference.leave()
     publicationGlobal.stop();
 }

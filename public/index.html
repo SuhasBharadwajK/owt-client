@@ -123,15 +123,18 @@
         <div class="video-container full-width">
           <div class="video-stream" ng-class="{'expanded': !isChatWindowOpen}">
           </div>
+          <div style="display: none; width:100%; height: 100%; background-image: url('dist/img/AR_CALL.png');position: absolute;background-repeat: no-repeat;background-size: 1495px 840px;"></div>
           <div class="video-chat-buttons"> 
             <a href="#"><i class="material-icons icon-style" ng-click="ctrl.toggleChatWindow()">comment</i></a>
             <div class="pulsating-circle" ng-click="ctrl.toggleChatWindow()" ng-if="ctrl.areUnreadMessagesPresent"></div>
             <!-- <a href="#"><i class="material-icons icon-style">group_add</i></a>   -->
-            <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="ctrl.isMicrophoneActive"><i class="material-icons icon-style">mic</i></a> 
-            <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="!ctrl.isMicrophoneActive"><i class="material-icons icon-style">mic_off</i></a> 
-            <a href="#" ng-click="ctrl.toggleCamera()" ng-show="ctrl.isCameraActive"><i class="material-icons icon-style">videocam</i></a> 
-            <a href="#" ng-click="ctrl.toggleCamera()" ng-show="!ctrl.isCameraActive"><i class="material-icons icon-style">videocam_off</i></a>
-            <a href="#" ng-click="ctrl.endCall()"><i class="material-icons icon-style" style="color:red;">call_end</i></a> 
+            <a href="#" ng-click="ctrl.startCallRecording()"><i class="call-control-icon material-icons icon-style critical" ng-class="{'active' : ctrl.isCallRecordingInProgress}">fiber_manual_record</i></a> 
+            <a href="#" ng-click="ctrl.openCadViewer()"><i class="call-control-icon material-icons icon-style"><span class="app-icon-cad"></span></i></a> 
+            <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="ctrl.isMicrophoneActive"><i class="call-control-icon material-icons icon-style">mic</i></a> 
+            <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="!ctrl.isMicrophoneActive"><i class="call-control-icon material-icons icon-style">mic_off</i></a> 
+            <a href="#" ng-click="ctrl.toggleCamera()" ng-show="ctrl.isCameraActive"><i class="call-control-icon material-icons icon-style">videocam</i></a> 
+            <a href="#" ng-click="ctrl.toggleCamera()" ng-show="!ctrl.isCameraActive"><i class="call-control-icon material-icons icon-style">videocam_off</i></a>
+            <a href="#" ng-click="ctrl.endCall()"><i class="call-control-icon material-icons icon-style critical active">call_end</i></a> 
           </div>
         </div>
         <!-- End of video stream -->

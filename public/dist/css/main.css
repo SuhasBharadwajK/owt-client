@@ -52,7 +52,7 @@ body {
 }
 
 .video-stream.expanded {
-    width: calc(100% - 25px);
+    width: calc(100%);
 }
 
 .video-stream video {
@@ -168,4 +168,12 @@ body {
     -webkit-transform: scale(0.8);
             transform: scale(0.8);
     }
+}
+
+.app-icon-cad {
+    font-size: 29px;
+}
+
+.call-control-icon.critical.active {
+    color: red;
 }

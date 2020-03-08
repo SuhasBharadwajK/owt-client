@@ -7,6 +7,7 @@ app.controller('HomeController', function HomeController($scope, $http) {
     vm.participants = [];
     vm.isMicrophoneActive = true;
     vm.isCameraActive = true;
+    vm.isCallRecordingInProgress = false;
     vm.me = null;
     vm.areUnreadMessagesPresent = false;
 
@@ -47,6 +48,13 @@ app.controller('HomeController', function HomeController($scope, $http) {
 
     vm.endCall = function () {
         conference.leave();
+    };
+
+    vm.startCallRecording = function() {
+        vm.isCallRecordingInProgress = !vm.isCallRecordingInProgress;
+    };
+    
+    vm.openCadViewer = function() {
     };
 
     const init = function () {

@@ -2117,7 +2117,7 @@ input:checked + .slider:before {
 .video-container>.video-chat-buttons{ 
     position: absolute; 
     z-index: 1;
-    bottom: 30px;
+    bottom: 100px;
 } 
 
 i.material-icons.icon-style {

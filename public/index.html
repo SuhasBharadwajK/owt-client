@@ -77,7 +77,7 @@
 
                                 <!-- Start of Chat Messages -->
                                 <div class="message" ng-class="{ 'me': message.isMe }" ng-repeat="message in ctrl.messages">
-                                  <img class="avatar-md" src="dist/img/avatars/avatar-female-5.jpg" data-toggle="tooltip"
+                                  <img class="avatar-md" ng-src="dist/img/avatars/{{message.fromParticipant.avatarFileName}}" data-toggle="tooltip"
                                     data-placement="top" title="Keith" alt="avatar" ng-if="!message.isMe">
                                   <div class="text-main full-width chat-message">
                                     <div class="text-group" ng-class="{ 'me': message.isMe }">

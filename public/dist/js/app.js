@@ -8,10 +8,15 @@ app.controller('HomeController', function HomeController($scope, $http) {
     vm.isMicrophoneActive = true;
     vm.isCameraActive = true;
     vm.me = null;
+    vm.areUnreadMessagesPresent = false;
 
     const roomId = "5e639fc41a59767544ecd940";
 
     vm.toggleChatWindow = function () {
+        if (!vm.isChatWindowOpen) {
+            vm.areUnreadMessagesPresent = false;
+        }
+
         vm.isChatWindowOpen = !vm.isChatWindowOpen;
     };
 
@@ -53,6 +58,7 @@ app.controller('HomeController', function HomeController($scope, $http) {
 
 
     const onMessageReceived = function (event) {
+        vm.areUnreadMessagesPresent = !vm.isChatWindowOpen;
         var participant = getParticipant(event.origin);
         vm.messages.push(new Message({ messageText: event.message, from: event.origin, to: event.to, isMe: conference.info.self.id == event.origin }, participant));
         $scope.$apply();

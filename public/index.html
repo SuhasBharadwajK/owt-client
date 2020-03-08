@@ -48,7 +48,8 @@
 						<div class="inside">
 							<div class="nav nav-tab menu">
 								<button class="btn"><img class="avatar-xl" ng-src="dist/img/avatars/{{ctrl.me.avatarFileName}}" src="dist/img/avatars/avatar-placeholder.png" alt="avatar"></button>
-								<a class="node" data-toggle="tab" ng-class="{'active': ctrl.isChatWindowOpen}"><i class="material-icons" ng-class="{'active': ctrl.isChatWindowOpen}" ng-click="ctrl.toggleChatWindow()">chat_bubble_outline</i></a>
+                <a class="node" data-toggle="tab" ng-class="{'active': ctrl.isChatWindowOpen}"><i class="material-icons" ng-class="{'active': ctrl.isChatWindowOpen}" ng-click="ctrl.toggleChatWindow()">chat_bubble_outline</i></a>
+                <div class="pulsating-circle" ng-if="ctrl.areUnreadMessagesPresent" ng-click="ctrl.toggleChatWindow()"></div>
 								<a href="#notifications" data-toggle="tab" class="f-grow1"><i class="material-icons">notifications_none</i></a>
 								<button class="btn mode"><i class="material-icons">brightness_2</i></button>
 								<a href="#settings" data-toggle="tab"><i class="material-icons">settings</i></a>
@@ -122,7 +123,8 @@
           <div class="video-stream" ng-class="{'expanded': !isChatWindowOpen}">
           </div>
           <div class="video-chat-buttons"> 
-            <a href="#"><i class="material-icons icon-style" ng-click="ctrl.toggleChatWindow()">comment</i></a>  
+            <a href="#"><i class="material-icons icon-style" ng-click="ctrl.toggleChatWindow()">comment</i></a>
+            <div class="pulsating-circle" ng-click="ctrl.toggleChatWindow()" ng-if="ctrl.areUnreadMessagesPresent"></div>
             <!-- <a href="#"><i class="material-icons icon-style">group_add</i></a>   -->
             <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="ctrl.isMicrophoneActive"><i class="material-icons icon-style">mic</i></a> 
             <a href="#" ng-click="ctrl.toggleMicrophone()" ng-show="!ctrl.isMicrophoneActive"><i class="material-icons icon-style">mic_off</i></a> 

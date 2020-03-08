@@ -17,7 +17,7 @@ p {
   margin-bottom: 0;
 }
 body {
-  font-family: CircularStd, sans-serif;
+  font-family: CircularStd, sans-serif, 'icomoon';
   font-size: 15px;
   background: #fdfdfd;
   color: #bdbac2;

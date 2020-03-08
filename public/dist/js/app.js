@@ -7,6 +7,7 @@ app.controller('HomeController', function HomeController($scope, $http) {
     vm.participants = [];
     vm.isMicrophoneActive = true;
     vm.isCameraActive = true;
+    vm.me = null;
 
     const roomId = "5e639fc41a59767544ecd940";
 
@@ -77,11 +78,15 @@ app.controller('HomeController', function HomeController($scope, $http) {
             method: 'GET',
             url: `/rooms/${roomId}/participants`
         }).then(function (response) {
-            vm.participants.push(...response.data.map(function (p) { return new Participant(p, getParticipantAvatarName()); }));
+            for (const p of response.data) {
+                vm.participants.push(new Participant(p, getParticipantAvatarName()));
+            }
+
+            vm.me = new Participant(vm.participants.find(function (p) { return p.id == conference.info.self.id }));
+
         }, function (error) {
             console.log("An error occurred while trying to fetch participants.")
         });
-
     };
 
     const getParticipant = function (participantId) {
